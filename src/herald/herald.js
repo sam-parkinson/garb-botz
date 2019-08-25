@@ -1,3 +1,24 @@
+function herald(msg) {
+  ping(msg);
+  pong(msg);
+  breakdown(msg);
+}
+
+function breakdown(msg) {
+  const words = splitter(msg);
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === 'gurley') {
+      gurley(msg);
+    } else if (words[i] === 'henderson') {
+      henderson(msg);
+    }
+  }
+}
+
+function splitter(msg) {
+  return msg.content.toLowerCase().split(' ');
+}
+
 function ping(msg) {
   if (msg.content === 'ping') {
     msg.reply('pong');
@@ -11,13 +32,11 @@ function pong(msg) {
 }
 
 function henderson(msg) {
-  if (msg.content.toLowerCase() === 'henderson') {
-    msg.channel.send('Darrell Henderson is the starting running back for the LA Rams')
-  }
+  msg.channel.send('Darrell Henderson is the starting running back for the LA Rams')
 }
 
-module.exports = {
-  ping,
-  pong,
-  henderson
+function gurley(msg) {
+  msg.channel.send(`Todd Gurley's arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings.`)
 }
+
+module.exports = herald;

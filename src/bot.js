@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const { DISCORD_TOKEN } = require('./config');
-const { ping, pong, henderson } = require('./herald/herald');
+const herald = require('./herald/herald');
 
 const client = new Discord.Client();
 
@@ -13,9 +13,7 @@ client.on('message', msg => {
   if (msg.author === client.user) {
     return;
   }
-  ping(msg);
-  pong(msg);
-  henderson(msg);
+  herald(msg);
 });
 
 client.login(DISCORD_TOKEN)
