@@ -5,9 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/bot.js"
+    "start": "node src/bot.js",
+    "predeploy": "npm audit",
+    "deploy": "git push heroku master"
   },
   "keywords": [],
+  "engines": {
+    "node": "10.15.3"
+  },
   "author": "Sam Parkinson",
   "license": "ISC",
   "dependencies": {
