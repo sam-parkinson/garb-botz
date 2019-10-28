@@ -13,6 +13,8 @@ function breakdown(msg) {
       henderson(msg);
     } else if (words[i] === 'treadwell') {
       treadwell(msg);
+    } else if (words[i] === 'agholor') {
+      agholor(msg);
     }
   }
 }
@@ -34,15 +36,19 @@ function pong(msg) {
 }
 
 function henderson(msg) {
-  msg.channel.send('Darrell Henderson is the starting running back for the LA Rams')
+  msg.channel.send('Darrell Henderson is the starting running back for the LA Rams');
 }
 
 function gurley(msg) {
-  msg.channel.send(`Todd Gurley's arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings.`)
+  msg.channel.send(`Todd Gurley''s arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings'.`);
 }
 
 function treadwell(msg) {
-  msg.channel.send(`The jersey is two different shades of purple.`)
+  msg.channel.send(`The jersey is two different shades of purple.`);
+}
+
+function agholor(msg) {
+  msg.channel.send('And his mishaps...');
 }
 
 module.exports = herald;
