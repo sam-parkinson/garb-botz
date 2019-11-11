@@ -7,14 +7,19 @@ function herald(msg) {
 function breakdown(msg) {
   const words = splitter(msg);
   for (let i = 0; i < words.length; i++) {
-    if (words[i] === 'gurley') {
-      gurley(msg);
-    } else if (words[i] === 'henderson') {
-      henderson(msg);
-    } else if (words[i] === 'treadwell') {
-      treadwell(msg);
-    } else if (words[i] === 'agholor') {
-      agholor(msg);
+    switch (words[i]) {
+      case 'gurley':
+        gurley(msg);
+        return;
+      case 'henderson':
+        henderson(msg);
+        return;
+      case 'treadwell':
+        treadwell(msg);
+        return;
+      case 'agholor':
+        agholor(msg);
+        return;
     }
   }
 }
@@ -40,7 +45,7 @@ function henderson(msg) {
 }
 
 function gurley(msg) {
-  msg.channel.send(`Todd Gurley''s arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings'.`);
+  msg.channel.send(`Todd Gurley's arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings.`);
 }
 
 function treadwell(msg) {
