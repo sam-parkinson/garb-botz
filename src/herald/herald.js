@@ -20,6 +20,9 @@ function breakdown(msg) {
       case 'agholor':
         agholor(msg);
         return;
+      case 'guice':
+        guice(msg);
+        return;
     }
   }
 }
@@ -54,6 +57,20 @@ function treadwell(msg) {
 
 function agholor(msg) {
   msg.channel.send('And his mishaps...');
+}
+
+function guice(msg) {
+  msg.channel.send(`Derrius Guice is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
+}
+
+function weeks() {
+  return Math.floor(Math.random() * 12);
+}
+
+function bodypart() {
+  const bodyArr = ['oblique', 'groin', 'chest', 'knee', 'leg', 'arm', 'shoulder', 'back', 'foot', 'ankle'];
+
+  return bodyArr[Math.floor(Math.random() * bodyArr.length)];
 }
 
 module.exports = herald;
