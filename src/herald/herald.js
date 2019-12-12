@@ -43,32 +43,28 @@ function pong(msg) {
   }
 }
 
-function henderson(msg) {
-  msg.channel.send('Darrell Henderson is the starting running back for the LA Rams');
-}
+const henderson = msg => (
+    msg.channel.send('Darrell Henderson is the starting running back for the LA Rams')
+  );
 
-function gurley(msg) {
-  msg.channel.send(`Todd Gurley's arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings.`);
-}
+const gurley = (msg) => (
+    msg.channel.send(`Todd Gurley's arthritis is so bad, even I wince when I see him run, and as a robot I am not programmed to have feelings.`)
+  );
 
-function treadwell(msg) {
-  msg.channel.send(`The jersey is two different shades of purple.`);
-}
+const treadwell = msg => (
+    msg.channel.send(`The jersey is two different shades of purple.`)
+  );
 
-function agholor(msg) {
-  msg.channel.send('And his mishaps...');
-}
+const agholor = msg => msg.channel.send('And his mishaps...');
 
-function guice(msg) {
-  msg.channel.send(`Derrius Guice is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
-}
+const guice = msg => (
+    msg.channel.send(`Derrius Guice is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
+);
 
-function weeks() {
-  return Math.floor(Math.random() * 12) + 2;
-}
+const weeks = () => Math.floor(Math.random() * 12) + 2;
 
-function bodypart() {
-  const bodyArr = ['oblique', 'groin', 'chest', 'knee', 'leg', 'arm', 'shoulder', 'back', 'foot', 'ankle'];
+const bodypart = () => {
+  const bodyArr = ['oblique', 'groin', 'chest', 'knee', 'leg', 'arm', 'shoulder', 'back', 'foot', 'ankle', 'wrist'];
 
   return bodyArr[Math.floor(Math.random() * bodyArr.length)];
 }
