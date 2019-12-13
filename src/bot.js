@@ -7,7 +7,7 @@ const herald = require('./herald/herald');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -32,10 +32,10 @@ client.on('message', msg => {
     if (!client.commands.has(command)) return;
 
     try {
-      cilent.commands.get(command).execute(message, args);
+      client.commands.get(command).execute(msg, args);
     } catch (err) {
       console.error(err);
-      message.reply('There was an error trying to execute that command')
+      msg.reply('There was an error trying to execute that command')
     }
   } else { 
     herald(msg);
