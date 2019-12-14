@@ -31,9 +31,10 @@ client.on('message', msg => {
     const args = msg.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    if (!client.commands.has(commandName)) return;
+    const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    const command = client.commands.get(commandName);
+    if (!command) return;
 
     if (command.args && !args.length) {
       return msg.channel.send(`Please provide arguments, ${msg.author}.`);
@@ -56,7 +57,7 @@ client.on('message', msg => {
       }
     }
 
-    timestamps.set(message.author.id, now);
+    timestamps.set(msg.author.id, now);
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
     try {
