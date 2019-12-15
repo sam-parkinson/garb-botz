@@ -21,7 +21,13 @@ function breakdown(msg) {
         agholor(msg);
         return;
       case 'guice':
-        guice(msg);
+        injuryProne(msg, 'Derrius Guice');
+        return;
+      case 'engram':
+        injuryProne(msg, 'Evan Engram');
+        return;
+      case 'wentz':
+        wentz(msg);
         return;
     }
   }
@@ -55,10 +61,26 @@ const treadwell = msg => (
     msg.channel.send(`The jersey is two different shades of purple.`)
   );
 
-const agholor = msg => msg.channel.send('And his mishaps...');
+const agholor = async msg => {
+  const emoji = (msg.guild.emojis.find(em => em.name === 'unlikeagholor') || '🗑️');
+  try {
+    await msg.react(emoji);
+  } catch (err) {
+    console.error(`The message failed to react`)
+  }
+};
 
-const guice = msg => (
-    msg.channel.send(`Derrius Guice is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
+const wentz = async msg => {
+  const emoji = '🗑️';
+  try {
+    await msg.react(emoji);
+  } catch (err) {
+    console.error(`The message failed to react`)
+  }
+};
+
+const injuryProne = (msg, name) => (
+    msg.channel.send(`${name} is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
 );
 
 const weeks = () => Math.floor(Math.random() * 12) + 2;
