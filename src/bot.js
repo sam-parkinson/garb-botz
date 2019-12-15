@@ -37,7 +37,13 @@ client.on('message', msg => {
     if (!command) return;
 
     if (command.args && !args.length) {
-      return msg.channel.send(`Please provide arguments, ${msg.author}.`);
+      let reply = `Please provide arguments following the command, ${msg.author}.`;
+
+      if (command.usage) {
+        reply += `\nThe proper usage: \`${prefix}${command.name} ${command.usage}\``;
+      }
+
+      return msg.channel.send(reply);
     }
 
     if (!cooldowns.has(command.name)) {
