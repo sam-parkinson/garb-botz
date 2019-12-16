@@ -26,8 +26,10 @@ function breakdown(msg) {
       case 'engram':
         injuryProne(msg, 'Evan Engram');
         return;
-      case 'wentz':
-        wentz(msg);
+      case 'wentz': 
+      case 'baker': 
+      case 'mayfield':
+        trash(msg);
         return;
     }
   }
@@ -70,7 +72,7 @@ const agholor = async msg => {
   }
 };
 
-const wentz = async msg => {
+const trash = async msg => {
   const emoji = '🗑️';
   try {
     await msg.react(emoji);
