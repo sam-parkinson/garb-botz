@@ -26,9 +26,14 @@ function breakdown(msg) {
       case 'engram':
         injuryProne(msg, 'Evan Engram');
         return;
+      case 'louisville':
+      case 'uofl':
+        louisville(msg);
+        return;
       case 'wentz': 
       case 'baker': 
       case 'mayfield':
+      case 'njoku':
         trash(msg);
         return;
     }
@@ -72,6 +77,10 @@ const agholor = async msg => {
   }
 };
 
+const louisville = msg => (
+  msg.channel.send(`Louisville sucks! Go ${lvilleRival()}!`)
+)
+
 const trash = async msg => {
   const emoji = '🗑️';
   try {
@@ -91,6 +100,12 @@ const bodypart = () => {
   const bodyArr = ['oblique', 'groin', 'chest', 'knee', 'leg', 'arm', 'shoulder', 'back', 'foot', 'ankle', 'wrist'];
 
   return bodyArr[Math.floor(Math.random() * bodyArr.length)];
+}
+
+const lvilleRival = () => {
+  const rivArr = ['Kentucky', 'Cincinnati', 'Memphis'];
+
+  return rivArr[Math.floor(Math.random() * rivArr.length)]
 }
 
 module.exports = herald;
