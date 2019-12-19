@@ -1,8 +1,19 @@
+/* require('dotenv').config();
+const { LVILLEFAN } = require('../config'); */
+
 function herald(msg) {
   ping(msg);
   pong(msg);
+  // lvilleFandom(msg);
   breakdown(msg);
 }
+
+/* const lvilleFandom = msg => {
+  if (msg.author.id === LVILLEFAN.toString()) {
+    console.log(`yay`)
+    // louisville(msg);
+  }
+} */
 
 function breakdown(msg) {
   const words = splitter(msg);
