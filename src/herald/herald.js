@@ -1,19 +1,8 @@
-/* require('dotenv').config();
-const { LVILLEFAN } = require('../config'); */
-
 function herald(msg) {
   ping(msg);
   pong(msg);
-  // lvilleFandom(msg);
   breakdown(msg);
 }
-
-/* const lvilleFandom = msg => {
-  if (msg.author.id === LVILLEFAN.toString()) {
-    console.log(`yay`)
-    // louisville(msg);
-  }
-} */
 
 function breakdown(msg) {
   const words = splitter(msg);
@@ -46,6 +35,10 @@ function breakdown(msg) {
       case 'mayfield':
       case 'njoku':
         trash(msg);
+        return;
+      case 'jameis':
+      case 'winston':
+        crab(msg);
         return;
     }
   }
@@ -100,6 +93,15 @@ const trash = async msg => {
     console.error(`The message failed to react`)
   }
 };
+
+const crab = async msg => {
+  const emoji = '🦀';
+  try {
+    await msg.react(emoji);
+  } catch (err) {
+    console.error(`The message failed to react`)
+  }
+}
 
 const injuryProne = (msg, name) => (
     msg.channel.send(`${name} is expected to miss ${weeks()} weeks with an injury to his ${bodypart()}.`)
