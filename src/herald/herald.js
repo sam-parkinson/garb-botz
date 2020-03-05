@@ -40,6 +40,10 @@ function breakdown(msg) {
       case 'winston':
         crab(msg);
         return;
+      case 'embiid':
+      case 'embid':
+        doA180(msg);
+        return;
     }
   }
 }
@@ -100,6 +104,19 @@ const crab = async msg => {
     await msg.react(emoji);
   } catch (err) {
     console.error(`The message failed to react`)
+  }
+}
+
+const doA180 = async msg => {
+  const one = '1️⃣';
+  const eight = '8️⃣';
+  const zero = '0️⃣';
+  try {
+    await msg.react(one);
+    await msg.react(eight);
+    await msg.react(zero);
+  } catch (err) {
+    console.error(`The message failed to react`);
   }
 }
 
