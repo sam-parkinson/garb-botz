@@ -19,15 +19,23 @@ module.exports = {
     // array stores responses from DMs, I think
     const options = [];
 
-    for (let i = 0; i < options; i++) {
-      msg.author.send(`Option ${i + 1}: (option)`);
+    for (let i = 0; i < optionNumb; i++) {
+      msg.author.send(`Option ${i + 1}: (option)`)
+        .then(options.push(response()))
       // add logic to get responses from DMs, push to options array
+
+      // should use collection logic
     }
 
-    return msg.channel.send(`Options: ${optionNumb}, runtime in hours: ${runtime}`);
+    return msg.channel.send(`Options: ${options}, runtime in hours: ${runtime}`);
   }
 }
 
+const response = () => {
+  return 'option'
+  // this is the function that gets a response from the user
+  // send message to user, collect response, return response text as string
+}
 // how will this work?
 // DM user for question, then...
 // for each option, DM user who requested the poll, await response
