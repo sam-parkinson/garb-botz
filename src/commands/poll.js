@@ -20,8 +20,12 @@ module.exports = {
     const options = [];
 
     for (let i = 0; i < optionNumb; i++) {
-      msg.author.send(`Option ${i + 1}: (option)`)
-        .then(options.push(response()))
+      // potentially factor this out into own function?
+      msg.author.send(`Option ${i + 1}:`)
+        .then(() => {
+          msg.channel.awaitMessages(filter, { maxMatches: 1 })
+        })
+        // need to wait for async function to finish before sending next option
       // add logic to get responses from DMs, push to options array
 
       // should use collection logic
@@ -31,11 +35,8 @@ module.exports = {
   }
 }
 
-const response = () => {
-  return 'option'
-  // this is the function that gets a response from the user
-  // send message to user, collect response, return response text as string
-}
+const filter = response => response;
+
 // how will this work?
 // DM user for question, then...
 // for each option, DM user who requested the poll, await response
