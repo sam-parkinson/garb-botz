@@ -64,8 +64,6 @@ const makePoll = async (msg, question, options, runtime) => {
   data.push(`\nThis poll will run for ${runtime} hour(s).`);
   data.push('\nReact to this message with your answer!');
 
-  console.log(poll);
-
   return msg.channel.send(data, { split: true })
     .then(async (pollMsg) => {
       for (const emoji of emojis) {
@@ -91,7 +89,8 @@ const makeResults = poll => {
       emoji: key,
       ...poll[key]
     }
-  }).sort((a, b) => b.count - a.count);
+  }).sort((a, b) => b.count - a.count)
+  .catch(err => console.error(`An error occured: ${err}`));
 }
 
 const printResults = (msg, question, results) => {
@@ -104,7 +103,8 @@ const printResults = (msg, question, results) => {
   }
   data.push('\nThank you for participating!');
 
-  return msg.channel.send(data, { split: true });
+  return msg.channel.send(data, { split: true })
+    .catch(err => console.error(`An error occured: ${err}`));
 }
 
 // TODO: refactor so this is easier to read, separate out functions a bit more
