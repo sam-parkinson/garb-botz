@@ -77,7 +77,7 @@ const makePoll = async (msg, question, options, runtime) => {
       });
     }).then((collected) => {
       for (const [emoji, value] of collected) {
-        poll[emoji].count += (value.count - 1);       
+        emojis.includes(emoji) ? poll[emoji].count += (value.count - 1) : null;       
       }
       return poll;
     }).catch(err => 
