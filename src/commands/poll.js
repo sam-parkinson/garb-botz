@@ -18,32 +18,27 @@ module.exports = {
       return msg.reply(`Poll currently does not support more than twenty-six options.`);
     }
 
-    // maybe add some restriction on how long the poll runs?
+    let question = await prompter(msg, 1, true);
+    let options = await prompter(msg, n);
 
-    const filter = response => response.content
+    let poll = await makePoll(msg, question, options, runtime);
 
-    let question = await prompter(msg, filter, 1, true);
-    let options = await prompter(msg, filter, n);
-
-    makePoll(msg, question, options, runtime);
-
-    /* return msg.channel.send( 
-      ':joy:: word\n' +
-      `Question: ${question[0]}\n` + 
-      `Options: ${options.join(' ')}\n` +
-      `Runtime in hours: ${runtime}`
-    ); */
+    console.log(poll);
+    
+    // after poll is made, run makeResults function
+    // after results sorted , run printResults function
   }
 }
 
-const prompter = async (msg, filter, n, question = false) => {
+const prompter = async (msg, n, question = false) => {
+  const filter = response => response.content && !response.author.bot;
   const prompt = question ? `Please provide the poll question` : `Please provide ${n} options`;
   const arr = [];
   return msg.author.send(prompt)
   .then((reply) => {
     return reply.channel.awaitMessages(filter, {
       max: n,
-      time: 30000,
+      time: 300000,
       errors: ['time'],
     })
   }).then((collected) => {
@@ -56,8 +51,11 @@ const prompter = async (msg, filter, n, question = false) => {
   );
 }
 
-const makePoll = (msg, question, options, runtime) => {
+const makePoll = async (msg, question, options, runtime) => {
+  const filter = (reaction, user) => reaction.emoji.name && !user.bot;
   const data = [];
+  const poll = {};
+  const emojis = [];
 
   data.push('**NEW POLL**');
   data.push(question[0]);
@@ -65,17 +63,41 @@ const makePoll = (msg, question, options, runtime) => {
   for (let i = 0; i < options.length; i++) {
     // this works!
     const ltr = String.fromCodePoint(0x1F1E6 + i);
+    poll[ltr] = {option: options[i], count: 0};
+    emojis.push(ltr);
     data.push(`\n ${ltr}: ${options[i]}`);
   }
 
-  data.push(`\nThis poll will run for ${runtime} hours.`);
+  data.push(`\nThis poll will run for ${runtime} hour(s).`);
   data.push('\nReact to this message with your answer!');
 
-  return msg.channel.send(data, { split: true });
+  console.log(poll);
+
+  return msg.channel.send(data, { split: true })
+    .then(async (pollMsg) => {
+      for (const emoji of emojis) {
+        await pollMsg.react(emoji);
+      }
+      return pollMsg.awaitReactions(filter, {
+        // replace this with actual runtime
+        time: 30000,
+      });
+    }).then((collected) => {
+      for (const [emoji, value] of collected) {
+        poll[emoji].count += (value.count - 1);       
+      }
+      return poll;
+    }).catch(err => 
+      console.error(`An error occured: ${err}`)
+    );
 }
 
+const makeResults = poll => {
 
-// build message object based on poll options and question
-// set timeout object for hours 
-// after hours closes, count responses on original message
-// post results as percentages 
+}
+
+const printResults = (msg, results) => {
+
+}
+
+// TODO: refactor so this is easier to read, separate out functions a bit more
