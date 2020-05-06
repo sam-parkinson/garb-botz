@@ -1,5 +1,3 @@
-const { prefix } = require('../config');
-
 module.exports = {
   name: 'poll',
   description: 'Run a poll of chat users.',
@@ -20,13 +18,9 @@ module.exports = {
 
     let question = await prompter(msg, 1, true);
     let options = await prompter(msg, n);
-
-    let poll = await makePoll(msg, question, options, runtime);
-
-    console.log(poll);
-    
-    // after poll is made, run makeResults function
-    // after results sorted , run printResults function
+    let poll = await makePoll(msg, question[0], options, runtime);
+    const results = makeResults(poll);
+    printResults(msg, question[0], results);    
   }
 }
 
@@ -58,10 +52,9 @@ const makePoll = async (msg, question, options, runtime) => {
   const emojis = [];
 
   data.push('**NEW POLL**');
-  data.push(question[0]);
+  data.push(question);
 
   for (let i = 0; i < options.length; i++) {
-    // this works!
     const ltr = String.fromCodePoint(0x1F1E6 + i);
     poll[ltr] = {option: options[i], count: 0};
     emojis.push(ltr);
@@ -80,7 +73,7 @@ const makePoll = async (msg, question, options, runtime) => {
       }
       return pollMsg.awaitReactions(filter, {
         // replace this with actual runtime
-        time: 30000,
+        time: runtime * 60 * 60 * 1000,
       });
     }).then((collected) => {
       for (const [emoji, value] of collected) {
@@ -93,11 +86,25 @@ const makePoll = async (msg, question, options, runtime) => {
 }
 
 const makeResults = poll => {
-
+  return Object.keys(poll).map((key) => {
+    return {
+      emoji: key,
+      ...poll[key]
+    }
+  }).sort((a, b) => b.count - a.count);
 }
 
-const printResults = (msg, results) => {
+const printResults = (msg, question, results) => {
+  const data = [];
+  data.push('**POLL RESULTS**');
+  data.push(`\nQuestion: ${question}`);
+  data.push('Results:');
+  for (const result of results) {
+    data.push(`${result.count} votes for ${result.option}`);
+  }
+  data.push('\nThank you for participating!');
 
+  return msg.channel.send(data, { split: true });
 }
 
 // TODO: refactor so this is easier to read, separate out functions a bit more
