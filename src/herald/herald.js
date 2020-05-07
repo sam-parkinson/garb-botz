@@ -133,7 +133,7 @@ const bodypart = () => {
 }
 
 const lvilleRival = () => {
-  const rivArr = ['Kentucky', 'Cincinnati', 'Memphis'];
+  const rivArr = ['Kentucky', 'Cincinnati', 'Clemson'];
 
   return rivArr[Math.floor(Math.random() * rivArr.length)]
 }
