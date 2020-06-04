@@ -12,8 +12,8 @@ module.exports = {
     const n = args[0];
     const runtime = args[1];
 
-    if (n > 26) {
-      return msg.reply(`Poll currently does not support more than twenty-six options.`);
+    if (n > 10) {
+      return msg.reply(`Poll currently does not support more than ten options.`);
     }
 
     let question = await prompter(msg, 1, true);
