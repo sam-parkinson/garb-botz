@@ -71,7 +71,7 @@ const makePoll = async (msg, question, options, runtime) => {
       }
       return pollMsg.awaitReactions(filter, {
         // replace this with actual runtime
-        time: runtime * 60 * 60 * 1000,
+        time: 15000 //runtime * 60 * 60 * 1000,
       });
     }).then((collected) => {
       for (const [emoji, value] of collected) {
@@ -84,13 +84,16 @@ const makePoll = async (msg, question, options, runtime) => {
 }
 
 const makeResults = poll => {
-  return Object.keys(poll).map((key) => {
-    return {
-      emoji: key,
-      ...poll[key]
-    }
-  }).sort((a, b) => b.count - a.count)
-  .catch(err => console.error(`An error occured: ${err}`));
+  try {
+    return Object.keys(poll).map((key) => {
+      return {
+        emoji: key,
+        ...poll[key]
+      }
+    }).sort((a, b) => b.count - a.count)
+  } catch{
+    err => console.error(`An error occured: ${err}`);
+  }
 }
 
 const printResults = (msg, question, results) => {
