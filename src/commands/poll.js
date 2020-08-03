@@ -71,7 +71,7 @@ const makePoll = async (msg, question, options, runtime) => {
       }
       return pollMsg.awaitReactions(filter, {
         // replace this with actual runtime
-        time: 15000 //runtime * 60 * 60 * 1000,
+        time: runtime * 60 * 60 * 1000,
       });
     }).then((collected) => {
       for (const [emoji, value] of collected) {
