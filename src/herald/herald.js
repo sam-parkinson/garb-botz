@@ -20,9 +20,6 @@ function breakdown(msg) {
       case 'agholor':
         agholor(msg);
         return;
-      case 'guice':
-        injuryProne(msg, 'Derrius Guice');
-        return;
       case 'engram':
         injuryProne(msg, 'Evan Engram');
         return;
@@ -30,7 +27,7 @@ function breakdown(msg) {
       case 'uofl':
         louisville(msg);
         return;
-      // case 'wentz': 
+      case 'wentz': 
       case 'baker': 
       case 'mayfield':
       case 'njoku':
@@ -43,6 +40,16 @@ function breakdown(msg) {
       case 'embiid':
       case 'embid':
         doA180(msg);
+        return;
+      case 'metcalf':
+        ripoff(msg, 'Robert Woods');
+        return;
+      case 'kittle':
+        ripoff(msg, 'Alex Collins');
+        return;
+      case 'juju':
+      case 'smith-schuster':
+        ripoff(msg, 'Dalvin Cook and Derrick Henry');
         return;
     }
   }
@@ -136,6 +143,10 @@ const lvilleRival = () => {
   const rivArr = ['Kentucky', 'Cincinnati', 'Clemson'];
 
   return rivArr[Math.floor(Math.random() * rivArr.length)]
+}
+
+const ripoff = (msg, name) => {
+  msg.channel.send(`The aforementioned player was traded for ${name}.`);
 }
 
 module.exports = herald;
