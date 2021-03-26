@@ -51,6 +51,9 @@ function breakdown(msg) {
       case 'smith-schuster':
         ripoff(msg, 'Dalvin Cook and Derrick Henry');
         return;
+      case 'aiyuk':
+        aiyuk(msg);
+        return;
     }
   }
 }
@@ -81,6 +84,10 @@ const gurley = (msg) => (
 
 const treadwell = msg => (
     msg.channel.send(`The jersey is two different shades of purple.`)
+  );
+
+const aiyuk = msg => (
+    msg.channel.send(`Nah they're going with kittle/pitts 2TE sets`)
   );
 
 const agholor = async msg => {
