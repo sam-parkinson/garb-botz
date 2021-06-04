@@ -51,6 +51,11 @@ function breakdown(msg) {
       case 'smith-schuster':
         ripoff(msg, 'Dalvin Cook and Derrick Henry');
         return;
+      case 'dillon':
+      case 'akers':
+      case 'dobbins':
+        dontMatter(msg);
+        return;
     }
   }
 }
@@ -147,6 +152,10 @@ const lvilleRival = () => {
 
 const ripoff = (msg, name) => {
   msg.channel.send(`The aforementioned player was traded for ${name}.`);
+}
+
+const dontMatter = (msg) => {
+  (Math.floor(Math.random() * 2) === 1) && msg.channel.send(`Running backs don't matter, every team uses committees now.`);
 }
 
 module.exports = herald;
