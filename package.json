@@ -17,7 +17,7 @@
   "author": "Sam Parkinson",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.6.4",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.6.0"
   },
   "devDependencies": {
