@@ -61,7 +61,7 @@ function breakdown(msg) {
 }
 
 function splitter(msg) {
-  return msg.content.toLowerCase().split(' ');
+  return msg.content.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").split(' ');
 }
 
 function ping(msg) {
